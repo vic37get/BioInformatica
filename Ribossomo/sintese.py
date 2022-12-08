@@ -14,6 +14,7 @@ def tratamentoEntrada(entrada):
 def sintese():
     dados = readInput('entrada.txt')
     condicoes_parada = ['UAA', 'UAG', 'UGA']
+    
     ...
 
 
