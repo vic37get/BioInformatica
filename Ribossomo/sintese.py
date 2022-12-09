@@ -23,27 +23,27 @@ def separaCodons(fita):
 
 def carregaDicionario():
     dicionario = {
-        'UUU': 'Phe', 'UUC': 'Phe',
-        'UUA': 'Leu', 'UUG': 'Leu', 'CUU': 'Leu', 'CUC': 'Leu', 'CUA': 'Leu', 'CUG': 'Leu',
-        'AUU': 'Ile', 'AUC': 'Ile', 'AUA': 'Ile',
-        'AUG': 'Met',
-        'GUU': 'Val', 'GUC': 'Val', 'GUA': 'Val', 'GUG': 'Val',
-        'UCU': 'Ser', 'UCC': 'Ser', 'UCA': 'Ser', 'UCG': 'Ser', 'AGU': 'Ser', 'AGC': 'Ser',
-        'CCU': 'Pro', 'CCC': 'Pro', 'CCA': 'Pro', 'CCG': 'Pro',
-        'ACU': 'Thr', 'ACC': 'Thr', 'ACA': 'Thr', 'ACG': 'Thr',
-        'GCU': 'Ala', 'GCC': 'Ala', 'GCA': 'Ala', 'GCG': 'Ala',
-        'UAU': 'Tyr', 'UAC': 'Tyr',
-        'UAA': 'Stop', 'UAG': 'Stop', 'UGA': 'Stop',
-        'CAU': 'His', 'CAC': 'His',
-        'CAA': 'Gln', 'CAG': 'Gln',
-        'AAU': 'Asn', 'AAC': 'Asn',
-        'AAA': 'Lys', 'AAG': 'Lys',
-        'GAU': 'Asp', 'GAC': 'Asp',
-        'GAA': 'Glu', 'GAG': 'Glu',
-        'UGU': 'Cys', 'UGC': 'Cys',
-        'UGG': 'Trp',
-        'CGU': 'Arg', 'CGC': 'Arg', 'CGA': 'Arg', 'CGG': 'Arg', 'AGA': 'Arg', 'AGG': 'Arg',
-        'GGU': 'Gly', 'GGC': 'Gly', 'GGA': 'Gly', 'GGG': 'Gly',
+        'UUU': 'F', 'UUC': 'F',
+        'UUA': 'L', 'UUG': 'L', 'CUU': 'L', 'CUC': 'L', 'CUA': 'L', 'CUG': 'L',
+        'AUU': 'I', 'AUC': 'I', 'AUA': 'I',
+        'AUG': 'M',
+        'GUU': 'V', 'GUC': 'V', 'GUA': 'V', 'GUG': 'V',
+        'UCU': 'S', 'UCC': 'S', 'UCA': 'S', 'UCG': 'S', 'AGU': 'S', 'AGC': 'S',
+        'CCU': 'P', 'CCC': 'P', 'CCA': 'P', 'CCG': 'P',
+        'ACU': 'T', 'ACC': 'T', 'ACA': 'T', 'ACG': 'T',
+        'GCU': 'A', 'GCC': 'A', 'GCA': 'A', 'GCG': 'A',
+        'UAU': 'Y', 'UAC': 'Y',
+        'UAA': 'ST', 'UAG': 'ST', 'UGA': 'ST',
+        'CAU': 'H', 'CAC': 'H',
+        'CAA': 'Q', 'CAG': 'Q',
+        'AAU': 'N', 'AAC': 'N',
+        'AAA': 'K', 'AAG': 'K',
+        'GAU': 'D', 'GAC': 'D',
+        'GAA': 'E', 'GAG': 'E',
+        'UGU': 'C', 'UGC': 'C',
+        'UGG': 'W',
+        'CGU': 'R', 'CGC': 'R', 'CGA': 'R', 'CGG': 'R', 'AGA': 'R', 'AGG': 'R',
+        'GGU': 'G', 'GGC': 'G', 'GGA': 'G', 'GGG': 'G',
     }
     return dicionario
 
@@ -58,9 +58,7 @@ def sintese():
             FITA[codon] = FITA[codon].replace(FITA[codon], DICIONARIO[FITA[codon]])
             if FITA[codon].find('Stop') != -1:
                 break
-            elif codon == len(FITA)-1:
-                print('Fita não contém codon de parada! (UGA, UUA, UAG)')
-                return
+            
     except ValueError:
         print('Fita não contém Metionina (AUG)!')
 
