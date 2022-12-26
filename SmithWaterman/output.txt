@@ -1,0 +1,6 @@
+GATC
+GATT
+None
+3
+-1
+-5
