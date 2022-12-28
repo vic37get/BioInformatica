@@ -18,9 +18,9 @@ def trataInput(dados):
     info = {'sequenciaUm': dados[0],
             'sequenciaDois': dados[1],
             'score': None,
-            'match': dados[2],
-            'mismatch': dados[3],
-            'gap': dados[4],
+            'match': int(dados[2]),
+            'mismatch': int(dados[3]),
+            'gap': int(dados[4]),
     }
     return info
 
@@ -39,28 +39,22 @@ def montaMatriz(sequenciaUm, sequenciaDois):
 def smithWaterman(sequenciaUm, sequenciaDois, match, mismatch, gap):
     sequenciaUm = sequenciaUm[::-1]
     matriz = montaMatriz(sequenciaUm, sequenciaDois)
-
-    #Olhar como ele percorre
     
-    '''for i in range(matriz.shape[0]-1, -1, -1):
+    for i in range(matriz.shape[0]-2, -1, -1):
         for j in range(1, matriz.shape[1]):
-            score_match, sequenciaUm_gap, sequenciaDois_gap = float('-inf'), float('-inf'), float('-inf')
-            print(sequenciaUm[i - 1], sequenciaDois[j - 1])
-            if sequenciaUm[i - 1] == sequenciaDois[j - 1]:
-                score_match = matriz[i - 1][j - 1] + int(match)
-                print('ScoreMatch: ', score_match)
-                print(matriz)
+            score_match, gap_esquerda, gap_direita, score_mismatch = float('-inf'), float('-inf'), float('-inf'), float('-inf')
+            print('DIAGONAL: ', matriz[i + 1][j - 1] + mismatch)
+            print('GAP DA ESQUERDA: ', matriz[i][j - 1] + gap)
+            print('GAP DA DIREITA: ', matriz[i + 1][j] + gap)
+            if sequenciaUm[i] == sequenciaDois[j - 1]:
+                score_match = matriz[i + 1][j - 1] + match
             else:
-                print('SequenciaUm_gap: ', matriz[i - 1][j])
-                sequenciaUm_gap = matriz[i - 1][j] + int(gap)
-                print('SequenciaDois_gap: ', matriz[i][j - 1])
-                sequenciaDois_gap = matriz[i][j - 1] + int(gap)
-                score_mismatch = matriz[i - 1][j - 1] + int(mismatch)
-                print(matriz)
-            matriz[i, j] = max(score_match, sequenciaUm_gap, sequenciaDois_gap, score_mismatch)
-            print('Matriz alterada:')
-            print(matriz)'''
-
-
+                gap_esquerda = matriz[i][j - 1] + gap
+                gap_direita = matriz[i + 1][j] + gap
+                score_mismatch = matriz[i + 1][j - 1] + mismatch
+            matriz[i][j] = max(score_match, gap_esquerda, gap_direita, score_mismatch)
+            print(matriz)
+    #Até aqui tudo ok, precisa ver como faz o backtracking e como fica caso tenha um gap na sequencia.
+    
 info = abreInput('input.txt')
 smithWaterman(info['sequenciaUm'], info['sequenciaDois'], info['match'], info['mismatch'], info['gap'])
