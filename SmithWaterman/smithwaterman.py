@@ -58,29 +58,22 @@ def smithWaterman(sequenciaUm, sequenciaDois, match, mismatch, gap):
             matriz[i][j] = max(score_match, gap_esquerda, gap_baixo, score_mismatch)
 
     #BackTracing da matriz de scores.
-    #COLOCAR O MAX SCORE COMO O MAIOR DA ULTIMA COLUNA
-    #AJEITAR O BACKTRACING
-    coluna = matriz.shape[1]-1
-    linha = 0
-    maior_score = matriz[linha][coluna]
-    maior_posicao = linha, coluna
-    i, j = maior_posicao
-    palavra1, palavra2 = [], []
-    print(matriz)
-    print(sequenciaUm[::-1], sequenciaDois)
+    maior_score = np.max(matriz[:,-1])
+    i, j = 0, matriz.shape[1]-1
+
     #Alinhamento das sequências.
-    print(len(sequenciaUm))
+    palavra1, palavra2 = [], []
     while i != len(sequenciaUm) or j != 0:
-        print(i,j)
+
         if j == 0:
             palavra2.append('-')
             palavra1.append(sequenciaUm[i])
             i+=1
         
-        if i == len(sequenciaUm):
+        elif i == len(sequenciaUm):
             palavra1.append('-')
             palavra2.append(sequenciaDois[j - 1])
-            i+=1
+            j-=1
 
         elif matriz[i][j] == matriz[i + 1][j - 1] + match:
             palavra1.append(sequenciaUm[i])
@@ -102,15 +95,12 @@ def smithWaterman(sequenciaUm, sequenciaDois, match, mismatch, gap):
         elif matriz[i][j] == matriz[i][j-1] + gap:
             palavra2.append(sequenciaDois[j-1])
             j-=1
-        print(palavra1, palavra2)
-        print(i, len(sequenciaUm), j)
 
     #Inversão da ordem ou sentido das sequências.
     seq1 = ''.join(palavra1)[::-1]
     seq2 = ''.join(palavra2)[::-1]
 
     return seq1, seq2, maior_score
-
 
 #Chamada do programa.
 info = abreInput('input.txt')

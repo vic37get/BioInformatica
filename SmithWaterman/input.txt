@@ -1,5 +1,5 @@
-ATA
-TCGTA
+ATCG
+TCG
 +1
 -1
 -2

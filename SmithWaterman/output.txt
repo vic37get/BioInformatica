@@ -1,6 +1,6 @@
-TCGTA
---ATA
--3
+ATCG
+-TCG
+1
 +1
 -1
 -2
