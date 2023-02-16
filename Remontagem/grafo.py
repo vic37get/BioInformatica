@@ -1,7 +1,10 @@
-class No:
-    def __init__(self, nome):
-        self.nome = nome
-        self.prefixo = None
-        self.sufixo = None
+from no import *
+from fileOperations import *
+from no import *
+
+sequencias = Arquivo('exemploAula.txt')
+
+for sequencia in sequencias:
+    ...
     
         

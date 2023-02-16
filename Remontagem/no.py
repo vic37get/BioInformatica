@@ -12,10 +12,6 @@ class No:
             kmers.append(self.sequencia[indice:self.kmer+indice])
         self.prefixo = kmers[0]
         self.sufixo = kmers[1]
-        return 
-no = No('ATG', 2)
-print(no.quebraEmKmer())
-print(no.prefixo)
-print(no.sufixo)
+        return
             
         
