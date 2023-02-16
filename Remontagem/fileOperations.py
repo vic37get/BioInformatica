@@ -10,5 +10,5 @@ class Arquivo:
         return sequencias
 
     def quebraEmLista(self, dados):
-        sequencias = dados.replace('\n', '').split(',')
+        sequencias = dados.replace(' ', '').replace('\n', '').split(',')
         return sequencias
