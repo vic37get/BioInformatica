@@ -4,12 +4,12 @@ from no import *
 
 sequencias = Arquivo('exemploAula.txt')
 kmer = 3
-nos = []
+grafo = {}
 
 for sequencia in sequencias.dados:
     no = No(sequencia, kmer)
-    nos.append(no)
+    grafo[no.prefixo] = []
+    for 
 
-for i in nos:
-    print(i.prefixo, i.sequencia, i.sufixo)    
+print(grafo)
     

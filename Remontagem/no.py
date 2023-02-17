@@ -13,6 +13,4 @@ class No:
             kmers.append(self.sequencia[indice:self.kmer+indice])
         self.prefixo = kmers[0]
         self.sufixo = kmers[1]
-        return
-            
-        
+        return    
