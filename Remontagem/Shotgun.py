@@ -1,10 +1,10 @@
 import random
 
 #Coloque quantas bases você deseja
-bases = 100
+bases = 20
 
 #Coloque o tamanho do k que você deseja
-k = 4
+k = 3
 
 #----------------------------------------#
 dna = ""

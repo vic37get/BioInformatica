@@ -1,7 +1,7 @@
 class Arquivo:
     def __init__(self, arquivo):
         self.arquivo = arquivo
-        self.dados = self.abreArquivo()
+        self.dados = None
     
     def abreArquivo(self):
         with open(self.arquivo, 'r', encoding='utf-8') as f:
@@ -12,3 +12,7 @@ class Arquivo:
     def quebraEmLista(self, dados):
         sequencias = dados.replace(' ', '').replace('\n', '').split(',')
         return sequencias
+    
+    def escreveArquivo(self, dados):
+        with open(self.arquivo, 'w', encoding='utf-8') as f:
+            f.write(dados)
