@@ -1,16 +1,19 @@
 class No:
-    def __init__(self, nome, kmer):
-        self.sequencia = nome
-        self.kmer = kmer - 1
-        self.sufixo = None
-        self.prefixo = None
-        self.numConexoes = 0
-        self.quebraEmKmer()
-        
-    def quebraEmKmer(self):
-        kmers = []
-        for indice in range(len(self.sequencia) - self.kmer+1):
-            kmers.append(self.sequencia[indice:self.kmer+indice])
-        self.prefixo = kmers[0]
-        self.sufixo = kmers[1]
-        return    
+    def __init__(self, nome):
+        self.nome = nome
+        self.qtdPrefixo = 0
+        self.qtdSufixo = 0
+        self.sufixos = []
+        self.diferenca = self.qtdPrefixo - self.qtdSufixo
+    
+    def aumentaQtdPrefixos(self):
+        self.qtdPrefixo += 1
+
+    def aumentaQtdSufixos(self):
+        self.qtdSufixo += 1
+
+    def adicionaSufixo(self, sufixo):
+        self.sufixos.append(sufixo)
+    
+    def exibeNo(self):
+        print('Nome: {}\nQuantidade de prefixo: {}\nQuantidade de sufixo: {}\nLista de sufixos: {}'.format(self.nome, self.qtdPrefixo, self.qtdSufixo, self.sufixos))

@@ -1,15 +1,19 @@
-from no import *
-from fileOperations import *
-from no import *
+class Grafo:
+    def __init__(self):
+        self.grafo = {}
 
-sequencias = Arquivo('exemploAula.txt')
-kmer = 3
-grafo = {}
+    def pesquisaChave(self, chave):
+        if self.grafo.get(chave):
+            return True
+        else:
+            return False
 
-for sequencia in sequencias.dados:
-    no = No(sequencia, kmer)
-    grafo[no.prefixo] = []
-    for 
+    def adicionaNoGrafo(self, chave, valor):
+        if self.pesquisaChave(chave) != True:
+            self.grafo[chave] = valor
+            return True
+        else:
+            return False
 
-print(grafo)
-    
+    def removeDoGrafo(self,  chave):
+        self.grafo.pop(chave)
