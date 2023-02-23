@@ -8,10 +8,11 @@ def quebraEmKmer(sequencia, kmer):
     kmers = []
     for indice in range(len(sequencia) - kmer+1):
         kmers.append(sequencia[indice:kmer+indice])
+    print(kmers[0], kmers[1])
     return kmers[0], kmers[1]
 
 def adicionaFita(fita, mer):
-    fita+=mer[1:]
+    fita+=mer[-1]
     return fita
 
 def pecaDeFita(fita, indice, kmer):
@@ -24,7 +25,7 @@ def buscaNaFita(grafo, fita, kmer):
             return grafo[novoInicio]
     return None
 
-def montaGrafo(grafo):
+def montaGrafo(grafo, kmer):
     for sequencia in sequencias.dados:
         prefixo, sufixo = quebraEmKmer(sequencia, kmer)
         prefixoNo = No(prefixo)
@@ -60,24 +61,31 @@ def reconstrucao(grafoFinal):
     fita = ''
     fita += proximo.nome
     while len(grafoFinal.grafo) > 0:
+        print(proximo.nome)
+        print(grafoFinal.grafo.keys())
         if len(grafoFinal.grafo[proximo.nome].sufixos) > 0:
             atual = grafoFinal.grafo[proximo.nome].sufixos.pop(0)
             proximo = grafoFinal.grafo[atual]
         else:
+            print('removi')
             grafoFinal.removeDoGrafo(proximo.nome)
             proximo = None
+            print(grafoFinal.grafo.keys())
         if proximo != None:
             fita = adicionaFita(fita, proximo.nome)
         else:
             proximo = buscaNaFita(grafoFinal.grafo, fita, kmer)
+            print('to buscando na fita')
+            print(len(grafoFinal.grafo))
+        print('FITA: ', fita)
     saida.escreveArquivo(fita)
 
 
 sequencias = Arquivo('exemploAula.txt')
 sequencias.dados = sequencias.abreArquivo()
+kmer = sequencias.kmer
 saida = Arquivo('saida.txt')
-kmer = 3
 grafo = Grafo()
-montaGrafo(grafo)
+montaGrafo(grafo, kmer)
 grafoFinal = deepcopy(grafo)
 reconstrucao(grafoFinal)
