@@ -1,7 +1,6 @@
 from no import *
 from fileOperations import *
 from grafo import *
-from copy import deepcopy
 
 def quebraEmKmer(sequencia, k):
     k-=1
@@ -58,39 +57,45 @@ def defineInicialEfinal(grafo):
             final = grafo.grafo[item]            
     return inicial, final
 
-def reconstrucao(grafoFinal):
-    fitaAux = ''
-    fitas = []
+def reconstrucao(grafoFinal,k):
+    fitaAuxiliar, fitaUm, fitaDois = '', '', ''
+    proximo = None
     inicial, final = defineInicialEfinal(grafoFinal)
     proximo = inicial
     fita = ''
     fita += proximo.nome
     #Percorrendo o grafo:
-
-    while len(grafoFinal.grafo.keys()) > 0:
-        exibeGrafo(grafoFinal)
-        print('---------------------')
-        if len(grafoFinal.grafo[proximo.nome].sufixos) > 0:
-            atual = grafoFinal.grafo[proximo.nome].sufixos.pop(0)
-            proximo = grafoFinal.grafo[atual]
-            fita = adicionaFita(fita, proximo.nome)
-        else:
-            grafoFinal.removeDoGrafo(proximo.nome)
-        if proximo == None:
-            pass
-        else:
-            fitas.append(fita)
-            proximo = buscaNaFita(grafoFinal.grafo, fita, kmer)
-
-        #print('FITA: ', fita)
+    while len(grafoFinal.grafo.keys()) != 0:
+        try:
+            if len(grafoFinal.grafo[proximo.nome].sufixos) != 0:
+                sufixoAtual = grafoFinal.grafo[proximo.nome].sufixos.pop(0)
+                proximo = grafoFinal.grafo[sufixoAtual]
+                fita = adicionaFita(fita, sufixoAtual)
+                if len(grafoFinal.grafo[proximo.nome].sufixos) == 0:
+                    grafoFinal.removeDoGrafo(proximo.nome)
+                if grafoFinal.pesquisaChave(proximo.nome) == False:
+                    fitaAuxiliar = fita
+                    fita = fitaUm+fitaAuxiliar+fitaDois
+                    for base in range(0,len(fita)-1):
+                        merAtual = fita[base:base+k]
+                        if grafoFinal.pesquisaChave(merAtual) == True:
+                            if len(grafoFinal.grafo[merAtual].sufixos) != 0:
+                                proximo = grafoFinal.grafo[merAtual]
+                                fitaUm = fita[0:base+k]
+                                fitaDois = fita[base+2:len(fita)]
+                                fita = ""
+                                break
+            else:
+                grafoFinal.removeDoGrafo(proximo.nome)
+        except KeyError:
+            #Programa finalizado.
+            break
     saida.escreveArquivo(fita)
 
-
-sequencias = Arquivo('input.txt')
+sequencias = Arquivo('Entradas/input.txt')
 sequencias.dados = sequencias.abreArquivo()
-kmer = sequencias.kmer
-saida = Arquivo('saida.txt')
+k = sequencias.kmer
+saida = Arquivo('Saidas/saida.txt')
 grafo = Grafo()
-montaGrafo(grafo, kmer)
-exibeGrafo(grafo)
-reconstrucao(grafo)
+montaGrafo(grafo,k)
+reconstrucao(grafo,k-1)

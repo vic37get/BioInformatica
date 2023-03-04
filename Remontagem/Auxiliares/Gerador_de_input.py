@@ -7,10 +7,10 @@
 import random
 
 #Informe o tamanho total da fita de dna:
-bases = 25
+bases = 15
 
 #Informe o tamanho do k:
-k = 3
+k = 4
 
 #Não precisa alterar o código a partir da linha
 #---------------------------------------------------------------------------------------------------#
@@ -32,10 +32,10 @@ if( k <= bases ):
     mers.sort()
     mers = "".join(mers).replace(" ","").replace("[","").replace("]","").replace("'","")
     
-file = open("input.txt","w")
+file = open("Entradas/input.txt","w")
 file.write(mers)
 file.close()
-file = open("resposta.txt","w")
+file = open("Saidas/resposta.txt","w")
 file.write(resposta)
 file.close()
 print("Feito!")
