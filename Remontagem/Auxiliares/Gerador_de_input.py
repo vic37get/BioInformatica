@@ -7,7 +7,7 @@
 import random
 
 #Informe o tamanho total da fita de dna:
-bases = 10
+bases = 25
 
 #Informe o tamanho do k:
 k = 3
@@ -35,7 +35,7 @@ if( k <= bases ):
 file = open("input.txt","w")
 file.write(mers)
 file.close()
-file = open("resp.txt","w")
+file = open("resposta.txt","w")
 file.write(resposta)
 file.close()
 print("Feito!")

@@ -3,6 +3,7 @@ class No:
         self.nome = nome
         self.qtdPrefixo = 0
         self.qtdSufixo = 0
+        self.diferenca = 0
         self.sufixos = []
     
     def aumentaQtdPrefixos(self):

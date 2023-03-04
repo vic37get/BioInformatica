@@ -16,4 +16,4 @@ class Grafo:
             return False
 
     def removeDoGrafo(self,  chave):
-        self.grafo.pop(chave)
+        del self.grafo[chave]
