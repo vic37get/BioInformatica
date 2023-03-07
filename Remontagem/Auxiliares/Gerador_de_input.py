@@ -7,7 +7,7 @@
 import random
 
 #Informe o tamanho total da fita de dna:
-bases = 15
+bases = 40
 
 #Informe o tamanho do k:
 k = 4
