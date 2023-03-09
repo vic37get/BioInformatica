@@ -127,3 +127,4 @@ fita = reconstrucao(grafo,k-1)
 if fita != False:
     saida.escreveArquivo(fita)
     testeSaida(inicial, final, fita, k)
+    exibeGrafo(grafo)
