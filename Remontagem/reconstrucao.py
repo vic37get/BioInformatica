@@ -117,7 +117,7 @@ def mainReconstrucao(arquivoEntrada):
     sequencias = Arquivo(arquivoEntrada)
     sequencias.dados = sequencias.abreArquivoSequencias()
     k = sequencias.kmer
-    saida = Arquivo('Saidas/saida.txt')
+    saida = Arquivo('Saidas/output.txt')
     grafo = Grafo()
     montaGrafo(grafo, sequencias, k)
     inicial, final = defineInicialEfinal(grafo)

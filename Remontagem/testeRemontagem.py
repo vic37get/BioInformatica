@@ -17,31 +17,25 @@ def saidaLog(resposta, saida, avaliacao):
 #Testa se a saída produzida pelo programa de remontaegm é igual a saída original.
 def testeSaida(inicial, final, fita, k):
     resposta = Arquivo('Saidas/resposta.txt').abreArquivo()
-    #resposta = abreArquivo('Saidas/resposta.txt', 'r')
-    saida = Arquivo('Saidas/saida.txt').abreArquivo()
-    #saida = abreArquivo('Saidas/saida.txt', 'r')
+    saida = Arquivo('Saidas/output.txt').abreArquivo()
     #Obtem o mer inicial e o mer final da fita.
     inicialfita, finalfita = inicialFinalFita(fita, k)
     #Caso se ordene os dois, os mesmos forem iguais.
     if (sorted(resposta) == sorted(saida)):
-        #print('MESMAS BASES!')
         #Caso o mer inicial e o final da fita produzida sejam iguais aos mers iniciais e finais do grafo.
         if (inicial.nome == inicialfita and final.nome == finalfita):
             #dadosCorretos = saidaLog(resposta, saida, 'CORRETO!')
             #Arquivo('Saidas/logSaidaCorreto.txt').gravaArquivo(dadosCorretos)
-            #gravaArquivo('Saidas/logSaidaCorreto.txt', dadosCorretos)
             return True
         #Caso contrario, grava no arquivo logSaidaErrada.txt e retorna False.
         else:
             dadosErrados = saidaLog(resposta, saida, 'ERRADO!')
             Arquivo('Saidas/logSaidaErrada.txt').gravaArquivo(dadosErrados)
-            #gravaArquivo('Saidas/logSaidaErrada.txt', dadosErrados)
             return False
     #Caso as sequencias não sejam iguais, grava no arquivo logSaidaErrada.txt e retorna False.
     else:
         dadosErrados = saidaLog(resposta, saida, 'ERRADO!')
         Arquivo('Saidas/logSaidaErrada.txt').gravaArquivo(dadosErrados)
-        #gravaArquivo('Saidas/logSaidaErrada.txt', dadosErrados)
         return False
 
 #Chamada do programa principal para executar os testes (iteracoes: quantidade de testes a serem executados).
