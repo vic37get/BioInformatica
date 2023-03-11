@@ -1,7 +1,6 @@
 from no import *
 from fileOperations import *
 from grafo import *
-from testeRemontagem import testeSaida
 
 #Quebra as sequencias em K mers.
 def quebraEmKmer(sequencia, k):
@@ -65,7 +64,7 @@ def reconstrucao(grafoFinal,k):
     inicial, final = defineInicialEfinal(grafoFinal)
     #Não existe vértice inicial ou final.
     if inicial is None or final is None:
-        print('Não é possível percorrer um caminho Euleriano!')
+        #print('Não é possível percorrer um caminho Euleriano!')
         return False
     proximo = inicial
     fita = ''
@@ -114,17 +113,18 @@ def reconstrucao(grafoFinal,k):
             break
     return fita
 
-sequencias = Arquivo('Entradas/input.txt')
-sequencias.dados = sequencias.abreArquivo()
-k = sequencias.kmer
-
-saida = Arquivo('Saidas/saida.txt')
-grafo = Grafo()
-
-montaGrafo(grafo, sequencias, k)
-inicial, final = defineInicialEfinal(grafo)
-fita = reconstrucao(grafo,k-1)
-if fita != False:
-    saida.escreveArquivo(fita)
-    testeSaida(inicial, final, fita, k)
-    exibeGrafo(grafo)
+def mainReconstrucao(arquivoEntrada):
+    sequencias = Arquivo(arquivoEntrada)
+    sequencias.dados = sequencias.abreArquivoSequencias()
+    k = sequencias.kmer
+    saida = Arquivo('Saidas/saida.txt')
+    grafo = Grafo()
+    montaGrafo(grafo, sequencias, k)
+    inicial, final = defineInicialEfinal(grafo)
+    fita = reconstrucao(grafo,k-1)
+    if fita != False:
+        saida.escreveArquivo(fita)
+        return inicial, final, fita, k
+    #Não é possivel percorrer o caminho Euleriano.
+    else:
+        return None
